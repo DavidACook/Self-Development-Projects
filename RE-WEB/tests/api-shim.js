@@ -23,6 +23,7 @@ globalThis.__rewebQA=qa;
 globalThis.chrome={runtime:{
   getManifest:()=>({version:'0.3.0',version_name:'0.3.0 RC1'}),
   sendMessage:async message=>{
+    if(qa.delayMs)await new Promise(resolve=>setTimeout(resolve,qa.delayMs));
     try {
       const settings=message.type==='get-settings'?await controller.reconcile():await controller.update(message.patch);
       return {ok:true,settings};

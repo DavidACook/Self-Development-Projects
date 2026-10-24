@@ -9,6 +9,7 @@ const fieldset = document.getElementById('engineControls');
 const aboutButton = document.getElementById('aboutButton');
 let settings = null;
 let busy = true;
+let pendingPatch = null;
 let feedback = 'loading';
 const t = key => translate(settings?.language || 'en', key);
 
@@ -22,8 +23,8 @@ function render() {
   document.getElementById('masterTitle').textContent = t(!settings ? 'loading' : enabled ? 'enabledTitle' : 'pausedTitle');
   document.getElementById('masterDescription').textContent = t(!settings ? 'reading' : enabled ? 'enabledDescription' : 'pausedDescription');
   for (const [key, input] of Object.entries(inputs)) {
-    if (key === 'language') input.value = settings?.language || 'en';
-    else input.checked = settings?.[key] ?? false;
+    if (key === 'language') input.value = pendingPatch?.language ?? settings?.language ?? 'en';
+    else input.checked = pendingPatch?.[key] ?? settings?.[key] ?? false;
     input.disabled = busy || !settings || (BOOLEAN_KEYS.includes(key) && key !== 'enabled' && !enabled);
   }
   fieldset.disabled = busy || !settings || !enabled;
@@ -45,11 +46,12 @@ for (const [key, input] of Object.entries(inputs)) {
   input.addEventListener('change', async () => {
     const next = key === 'language' ? input.value : input.checked;
     const hadFocus = document.activeElement === input;
+    pendingPatch = { [key]: next };
     busy = true; retry.hidden = true; feedback = 'applying'; render();
     try { settings = await send('update-settings', { [key]: next }); feedback = 'saved'; }
     catch { feedback = 'saveFailed'; retry.hidden = false; }
     finally {
-      busy = false; render();
+      pendingPatch = null; busy = false; render();
       if (hadFocus && !input.disabled && [document.body, input].includes(document.activeElement)) input.focus({ preventScroll: true });
     }
   });

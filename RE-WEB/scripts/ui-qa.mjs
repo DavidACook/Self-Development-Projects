@@ -53,6 +53,14 @@ try{
     assert.equal(await page.locator('html').getAttribute('lang'),'en');
     assert.equal(await page.locator('#spellingHelper').isChecked(),true);
   });
+  await check('A delayed native save keeps the pending switch position until acknowledgement',async()=>{
+    await page.evaluate(()=>{__rewebQA.delayMs=200;});
+    await page.locator('#googleClassic').uncheck();
+    assert.equal(await page.locator('#googleClassic').isChecked(),false);
+    await saved(page);assert.equal(await page.evaluate(()=>__rewebQA.rules.length),0);
+    await page.locator('#googleClassic').check();await saved(page);
+    await page.evaluate(()=>{__rewebQA.delayMs=0;});
+  });
   await check('Master switch pauses, remembers engine preference and resumes',async()=>{
     await page.locator('#enabled').uncheck();await saved(page);
     assert.equal(await page.locator('#googleClassic').isDisabled(),true);assert.equal(await page.locator('#googleClassic').isChecked(),true);
