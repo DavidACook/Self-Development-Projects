@@ -1,0 +1,61 @@
+name: RE-WEB checks
+on:
+  push:
+    paths: ['RE-WEB/**', '.github/workflows/re-web.yml']
+  pull_request:
+    paths: ['RE-WEB/**', '.github/workflows/re-web.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: RE-WEB
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: RE-WEB/package-lock.json
+      - run: npm ci
+      - run: npm test && npm run check && npm run lint:firefox
+      - run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:ui && npm run test:spelling && npm run test:browser
+      - run: npm run package
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: re-web-chrome-evidence
+          path: |
+            RE-WEB/docs/evidence/
+            RE-WEB/dist/*.zip
+            RE-WEB/dist/SHA256SUMS.txt
+  firefox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: RE-WEB
+    env:
+      SE_AVOID_STATS: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: browser-actions/setup-firefox@v1
+        with:
+          firefox-version: latest
+      - uses: browser-actions/setup-geckodriver@latest
+      - run: python3 -m pip install -r requirements-dev.txt
+      - run: python3 scripts/firefox-qa.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: re-web-firefox-evidence
+          path: RE-WEB/docs/evidence/firefox-qa.json

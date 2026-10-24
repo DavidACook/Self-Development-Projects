@@ -1,0 +1,154 @@
+{
+  "suite": "Native Google RE2 expression and routing verification",
+  "package": "google-re2",
+  "version": "1.1.20251105",
+  "compiled_expressions": 2,
+  "checks": [
+    {
+      "name": "first query parameter",
+      "status": "passed"
+    },
+    {
+      "name": "later query parameter",
+      "status": "passed"
+    },
+    {
+      "name": "apex domain",
+      "status": "passed"
+    },
+    {
+      "name": "Japan",
+      "status": "passed"
+    },
+    {
+      "name": "UK",
+      "status": "passed"
+    },
+    {
+      "name": "HTTP",
+      "status": "passed"
+    },
+    {
+      "name": "encoded punctuation",
+      "status": "passed"
+    },
+    {
+      "name": "pagination and date filter",
+      "status": "passed"
+    },
+    {
+      "name": "query-looking text in value",
+      "status": "passed"
+    },
+    {
+      "name": "existing Web mode / no loop",
+      "status": "passed"
+    },
+    {
+      "name": "Web mode first / no loop",
+      "status": "passed"
+    },
+    {
+      "name": "Images",
+      "status": "passed"
+    },
+    {
+      "name": "AI Mode explicitly selected",
+      "status": "passed"
+    },
+    {
+      "name": "All explicitly selected",
+      "status": "passed"
+    },
+    {
+      "name": "Videos",
+      "status": "passed"
+    },
+    {
+      "name": "Shopping",
+      "status": "passed"
+    },
+    {
+      "name": "News",
+      "status": "passed"
+    },
+    {
+      "name": "unknown future mode",
+      "status": "passed"
+    },
+    {
+      "name": "empty mode",
+      "status": "passed"
+    },
+    {
+      "name": "mode without value",
+      "status": "passed"
+    },
+    {
+      "name": "duplicate modes",
+      "status": "passed"
+    },
+    {
+      "name": "Maps",
+      "status": "passed"
+    },
+    {
+      "name": "Images subdomain",
+      "status": "passed"
+    },
+    {
+      "name": "accounts",
+      "status": "passed"
+    },
+    {
+      "name": "other regional domain",
+      "status": "passed"
+    },
+    {
+      "name": "Bing",
+      "status": "passed"
+    },
+    {
+      "name": "host prefix attack",
+      "status": "passed"
+    },
+    {
+      "name": "query host spoof",
+      "status": "passed"
+    },
+    {
+      "name": "path prefix attack",
+      "status": "passed"
+    },
+    {
+      "name": "query named elsewhere",
+      "status": "passed"
+    },
+    {
+      "name": "q only inside a value",
+      "status": "passed"
+    },
+    {
+      "name": "no query",
+      "status": "passed"
+    },
+    {
+      "name": "empty query",
+      "status": "passed"
+    },
+    {
+      "name": "fragment only",
+      "status": "passed"
+    },
+    {
+      "name": "special mode inside a value",
+      "status": "passed"
+    },
+    {
+      "name": "key case is significant",
+      "status": "passed"
+    }
+  ],
+  "status": "passed",
+  "limitation": "This tests the native RE2 library, not the Chrome DNR API, permission handling, installation or live Google behavior."
+}

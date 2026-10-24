@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>RE:WEB · Search controls</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body data-state="loading">
+  <main class="deck">
+    <div class="system-line"><span data-i18n="utility">PERSONAL SEARCH UTILITY</span><span id="systemState">CONNECTING</span></div>
+    <header class="brand">
+      <div><h1>RE<span>:</span>WEB</h1></div>
+      <img class="brand-mark" src="assets/mark.svg" alt="" width="44" height="44">
+    </header>
+    <p class="tagline" data-i18n="tagline">De-AI your search and reclaim your brain.</p>
+    <p class="blurb" data-i18n="blurb">Uses Google's Web filter to reduce AI summaries and other clutter.</p>
+    <div class="viewport" aria-hidden="true">
+      <img src="assets/signal.svg" alt="" width="340" height="138">
+      <div class="viewport-bottom"><span data-i18n="terms">SEARCH / YOUR TERMS</span><span class="signal-state">● <span id="signalState">WAITING</span></span></div>
+    </div>
+    <section id="controls" aria-label="Search controls" data-i18n-aria="controlsLabel">
+      <label class="master toggle-row" for="enabled">
+        <span><span class="eyebrow" data-i18n="master">MASTER CONTROL</span><strong id="masterTitle">Loading controls…</strong><small id="masterDescription">Reading local preferences.</small></span>
+        <input id="enabled" type="checkbox" role="switch" aria-label="Enable RE:WEB" data-i18n-aria="enableLabel" disabled>
+        <span class="switch large" aria-hidden="true"></span>
+      </label>
+      <fieldset id="engineControls" disabled>
+        <legend><span>01</span> <span data-i18n="routing">SEARCH ROUTING</span></legend>
+        <label class="engine toggle-row" for="googleClassic">
+          <span><strong>Google <span class="mode-label">/ WEB</span></strong><small data-i18n="googleDescription">Prefer links over AI Overviews.</small></span>
+          <input id="googleClassic" type="checkbox" role="switch" aria-label="Prefer Google Web results" data-i18n-aria="googleLabel" aria-describedby="googleDetail" disabled>
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <p id="googleDetail" class="engine-detail" data-i18n="googleDetail">Google.com, .co.jp &amp; .co.uk · Explicit search tabs are preserved.</p>
+        <label class="engine spelling-row toggle-row" for="spellingHelper">
+          <span><strong data-i18n="spelling">Spelling help</strong><small data-i18n="spellingDescription">Browser spellcheck + a Google spelling shortcut.</small></span>
+          <input id="spellingHelper" type="checkbox" role="switch" aria-label="Enable spelling help" data-i18n-aria="spellingLabel" disabled>
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </fieldset>
+      <p class="apply-note" data-i18n="apply">Changes the result view, not Google's ranking. Applies to your next search.</p>
+    </section>
+    <section id="about" aria-label="About and privacy" data-i18n-aria="aboutLabel" hidden>
+      <h2 data-i18n="aboutTitle">AI should be a choice.</h2>
+      <p data-i18n="aboutText"></p>
+      <h3 data-i18n="privacyTitle"></h3><p data-i18n="privacyText"></p>
+      <h3 data-i18n="limitTitle"></h3><p data-i18n="limitText"></p>
+      <p class="about-end" data-i18n="credits"></p>
+    </section>
+    <div class="language-row"><label for="language" data-i18n="language">Language / 言語</label><select id="language" disabled><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option></select></div>
+    <footer><button type="button" id="aboutButton" aria-expanded="false" aria-controls="about">About &amp; privacy ↗</button><span id="version">v0.3.0 RC1</span></footer>
+    <div class="feedback"><p id="message" role="status" aria-live="polite" aria-atomic="true">Loading controls…</p><button type="button" id="retry" data-i18n="retry" hidden>Retry</button></div>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

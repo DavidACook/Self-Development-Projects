@@ -1,0 +1,26 @@
+{
+  "name": "re-web",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Google Web search controls for Chrome and Firefox, in English and Japanese.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:browser": "node scripts/browser-qa.mjs",
+    "test:ui": "node scripts/ui-qa.mjs",
+    "check": "node scripts/check.mjs",
+    "package": "python3 scripts/package.py",
+    "build": "python3 scripts/build.py",
+    "test:firefox": "python3 scripts/firefox-qa.py",
+    "test:spelling": "node scripts/spelling-qa.mjs",
+    "lint:firefox": "npm run build && web-ext lint --source-dir dist/firefox --warnings-as-errors"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "web-ext": "10.8.0"
+  }
+}

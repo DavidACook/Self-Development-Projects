@@ -1,0 +1,48 @@
+{
+  "suite": "Production spelling content script with a local storage adapter",
+  "date": "2026-10-24T09:34:40.294Z",
+  "checks": [
+    {
+      "name": "Enables the real search field and keeps native corrections and result text",
+      "status": "passed"
+    },
+    {
+      "name": "Shortcut explicitly uses All, preserves language/SafeSearch and drops verbatim/pagination",
+      "status": "passed"
+    },
+    {
+      "name": "Typing updates spelling target and safely encodes symbols and Japanese",
+      "status": "passed"
+    },
+    {
+      "name": "Japanese helper labels update without changing the search text",
+      "status": "passed"
+    },
+    {
+      "name": "Replaced search fields are enhanced and only one helper survives DOM updates",
+      "status": "passed"
+    },
+    {
+      "name": "Master pause restores original spellcheck attributes and removes the helper immediately",
+      "status": "passed"
+    },
+    {
+      "name": "Independent spelling switch restores the field and can resume",
+      "status": "passed"
+    },
+    {
+      "name": "All view preserves spellcheck but omits the redundant spelling shortcut",
+      "status": "passed"
+    },
+    {
+      "name": "No automatic spelling request or uncaught script errors",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Fixtures use localhost and a browser-storage adapter; not evidence of live Google layout or native dictionary suggestions.",
+    "No spelling shortcut is followed and no query is sent to Google by this test."
+  ],
+  "browser": "151.0.7922.34",
+  "status": "passed"
+}

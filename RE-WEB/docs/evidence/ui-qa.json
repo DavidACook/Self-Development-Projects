@@ -1,0 +1,64 @@
+{
+  "suite": "Production popup with browser API test adapter",
+  "date": "2026-10-24T09:33:04.333Z",
+  "checks": [
+    {
+      "name": "Production HTML, CSS and modules render without errors",
+      "status": "passed"
+    },
+    {
+      "name": "Master switch pauses, remembers engine preference and resumes",
+      "status": "passed"
+    },
+    {
+      "name": "Engine preference survives pause and popup reload",
+      "status": "passed"
+    },
+    {
+      "name": "Save failure restores confirmed UI and rule state, then retries",
+      "status": "passed"
+    },
+    {
+      "name": "Read failure disables controls and recovers via Retry",
+      "status": "passed"
+    },
+    {
+      "name": "Keyboard Tab and Space operate labelled switches",
+      "status": "passed"
+    },
+    {
+      "name": "320px and 380px layouts have no horizontal overflow and fit popup height",
+      "status": "passed"
+    },
+    {
+      "name": "Reduced motion removes animation and transitions",
+      "status": "passed"
+    },
+    {
+      "name": "About view discloses privacy, Web Guide limitation and returns",
+      "status": "passed"
+    },
+    {
+      "name": "Japanese selection translates labels, errors and About; persists across reload",
+      "status": "passed"
+    },
+    {
+      "name": "Language remains available while routing and spelling are paused",
+      "status": "passed"
+    },
+    {
+      "name": "Forced-colors mode retains identifiable controls",
+      "status": "passed"
+    },
+    {
+      "name": "No uncaught UI JavaScript exceptions during all interactions",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Uses production popup and controller modules in Chromium with a test adapter for chrome.runtime, chrome.storage and DNR.",
+    "Does not validate extension installation, real DNR APIs, browser profile persistence or live search-engine behavior."
+  ],
+  "browser": "151.0.7922.34",
+  "status": "passed"
+}

@@ -1,0 +1,7 @@
+/* All rules are scoped to our own helper. Google results are never hidden. */
+#reweb-spelling-helper { box-sizing: border-box; max-width: 680px; margin: 12px 18px; padding: 10px 14px; border: 1px solid #7295bd; border-left: 3px solid #7be4ef; border-radius: 3px; background: #0c1830; color: #d9f0ff; font: 13px/1.5 Arial, 'Yu Gothic', Meiryo, sans-serif; text-align: left; }
+#reweb-spelling-helper > span { color: #94dfe9; font: 11px/1.5 'Courier New', monospace; letter-spacing: 1px; margin-right: 14px; }
+#reweb-spelling-helper > a { color: #cff6ff; font: inherit; text-decoration: underline; text-underline-offset: 3px; }
+#reweb-spelling-helper > a:focus-visible { outline: 2px solid #7be4ef; outline-offset: 3px; }
+#reweb-spelling-helper > small { display: block; font: 11px/1.6 Arial, 'Yu Gothic', Meiryo, sans-serif; color: #b9cce4; }
+@media (forced-colors: active) { #reweb-spelling-helper { background: Canvas; color: CanvasText; border-color: CanvasText; } #reweb-spelling-helper > a { color: LinkText; } }

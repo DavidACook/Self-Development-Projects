@@ -1,0 +1,12 @@
+{
+  "suite": "Firefox temporary installation and real extension APIs",
+  "date": "2026-10-24T09:25:34.973983+00:00",
+  "checks": [],
+  "limitations": [
+    "No live Google results, native spelling dictionary, store signing, Android, or OS coverage.",
+    "After installing the unmodified package, a temporary test-only copy adds a QA page and declarativeNetRequestFeedback for native rule tests. Production code is unchanged."
+  ],
+  "status": "blocked",
+  "failure": "Message: Failed to decode response from marionette\n",
+  "startup_log_excerpt": "[Parent 18, IPC I/O Parent] WARNING: process 114 exited on signal 11: file ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:161\n[Parent 18, IPC I/O Parent] WARNING: process 121 exited on signal 11: file ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:161\n[124] Sandbox: writing /proc/self/uid_map: EPERM\nA content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down\n1792833937268\tMarionette\tINFO\tStopped listening on port 40349\nJavaScript error: , line 0: uncaught exception: undefined\n[Parent 18, IPC I/O Parent] WARNING: process 124 exited on signal 11: file ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc:161\nJavaScript error: resource://gre/modules/workers/require.js, line 139: Error: : \nJavaScript error: , line 0: uncaught exception: undefined\nJavaScript error: moz-src:///toolkit/components/search/SearchService.sys.mjs, line 1638: Error: Abandoning search service init due to shutting down\nJavaScript error: moz-src:///toolkit/components/search/SearchService.sys.mjs, line 1638: Error: Abandoning search service init due to shutting down\n1792833937412\twebdriver::server\tINFO\tShutting down"
+}

@@ -1,0 +1,12 @@
+{
+  "suite": "Real Chrome extension QA",
+  "date": "2026-10-24T09:33:05.712Z",
+  "checks": [],
+  "limitations": [
+    "Google live results blocked by unusual-traffic CAPTCHA in a separate cloud-browser attempt. No CAPTCHA bypass attempted.",
+    "Navigation tests intercept requests and serve local fixtures at Google-shaped URLs. They validate browser routing, not current Google result content.",
+    "Chrome Web Store, manual address-bar typing, Edge, Firefox, macOS and Windows are not verified by this automated suite."
+  ],
+  "status": "blocked",
+  "failure": "Host denies Chrome process-singleton Unix sockets: Operation not permitted."
+}

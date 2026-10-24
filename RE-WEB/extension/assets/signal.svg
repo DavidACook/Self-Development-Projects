@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="138" viewBox="0 0 340 138" fill="none">
+  <defs>
+    <radialGradient id="a"><stop stop-color="#2874ae" stop-opacity=".45"/><stop offset="1" stop-color="#07112e" stop-opacity="0"/></radialGradient>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#aeffff" stop-opacity=".7"/><stop offset="1" stop-color="#265cbb" stop-opacity=".08"/></linearGradient>
+    <linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c6ffff"/><stop offset="1" stop-color="#3896ff" stop-opacity=".1"/></linearGradient>
+    <filter id="g"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <ellipse cx="170" cy="74" rx="137" ry="69" fill="url(#a)"/>
+  <g stroke="#4d83bc" stroke-opacity=".19" stroke-width=".6">
+    <path d="M0 125H340M15 112H325M40 102H300M60 94H280M75 88H265M93 83H247M104 79H236M116 76H224M126 73H214"/>
+    <path d="M170 68 0 137M170 68 46 138M170 68 100 138M170 68 146 138M170 68 194 138M170 68 240 138M170 68 294 138M170 68 340 137"/>
+  </g>
+  <g stroke="#5eb6e5" stroke-width=".65">
+    <ellipse cx="170" cy="82" rx="112" ry="26" stroke-opacity=".4"/>
+    <ellipse cx="170" cy="82" rx="82" ry="17" stroke-dasharray="2 6" stroke-opacity=".6"/>
+    <path d="M64 85 97 74M243 87 276 98M182 58 207 37M130 108 110 125" stroke-opacity=".5"/>
+  </g>
+  <g stroke="#7cdef3" stroke-width=".8" fill="url(#b)">
+    <path d="M130 51 151 39 172 51V95L151 108 130 95Z"/>
+    <path d="M130 51 151 64 172 51M151 64V108"/>
+    <path d="M170 29 191 17 212 29V73L191 86 170 73Z"/>
+    <path d="M170 29 191 42 212 29M191 42V86"/>
+    <path d="M167 81 182 73 197 81V104L182 113 167 104Z" stroke-opacity=".4"/>
+  </g>
+  <path d="M170 30V75M151 65V106M192 18V42" stroke="#9df9ff" stroke-width="3" opacity=".5" filter="url(#g)"/>
+  <path d="M170 30V75M151 65V106M192 18V42" stroke="url(#c)" stroke-width="1.2"/>
+  <g fill="#b5edff"><circle cx="58" cy="53" r="1"/><circle cx="96" cy="34" r=".7"/><circle cx="245" cy="47" r="1"/><circle cx="290" cy="74" r=".8"/><circle cx="226" cy="26" r=".6"/><circle cx="78" cy="101" r="1.3"/><circle cx="271" cy="30" r=".8"/></g>
+  <path d="M238 83H246M242 79V87M105 57H111M108 54V60" stroke="#a0e6fc" stroke-width=".8"/>
+</svg>

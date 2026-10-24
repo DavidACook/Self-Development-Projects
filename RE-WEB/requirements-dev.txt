@@ -1,0 +1,2 @@
+# Optional real Firefox installation/API suite; not shipped in the extension.
+selenium>=4.35,<5

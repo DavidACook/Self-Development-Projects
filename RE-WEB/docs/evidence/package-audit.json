@@ -1,0 +1,26 @@
+{
+  "version": "0.3.0-rc1",
+  "targets": [
+    {
+      "target": "chrome",
+      "file": "RE-WEB-v0.3.0-rc1-chrome.zip",
+      "entries": 23,
+      "sha256": "b80788b19024f40e4b8a4cd83f9da58b493e935abb6214069b7014c323b80337",
+      "status": "passed"
+    },
+    {
+      "target": "firefox",
+      "file": "RE-WEB-v0.3.0-rc1-firefox.zip",
+      "entries": 23,
+      "sha256": "a6ea8202709dfcb085fdfa6cc98aee20f874eeb5dab72f1961b0631185946ca7",
+      "status": "passed"
+    }
+  ],
+  "checks": [
+    "manifest references",
+    "ZIP CRC",
+    "production byte equality",
+    "no test code or dependencies in browser ZIPs"
+  ],
+  "limitation": "Packaging validation does not prove installation, signing or live Google behavior."
+}
