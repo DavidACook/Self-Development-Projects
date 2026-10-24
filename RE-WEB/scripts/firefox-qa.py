@@ -103,6 +103,9 @@ def main():
         with tempfile.TemporaryDirectory(prefix='reweb-firefox-qa-') as temp:
             temp = Path(temp)
             options = Options(); options.add_argument('-headless')
+            # Native match diagnostics are a Firefox developer-only API. This
+            # preference belongs solely to this disposable synthetic-test profile.
+            options.set_preference('extensions.dnr.feedback', True)
             binary = os.environ.get('REWEB_FIREFOX_PATH') or shutil.which('firefox')
             if not binary:
                 candidates=sorted((Path.home()/'.cache/ms-playwright').glob('firefox-*/firefox/firefox'))
