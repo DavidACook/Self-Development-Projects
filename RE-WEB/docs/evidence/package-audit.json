@@ -5,14 +5,14 @@
       "target": "chrome",
       "file": "RE-WEB-v0.3.0-rc1-chrome.zip",
       "entries": 23,
-      "sha256": "b80788b19024f40e4b8a4cd83f9da58b493e935abb6214069b7014c323b80337",
+      "sha256": "04d675d65adcfc7a3854b81cb3535f5d1a6703e9afd0e51f22600e4c6895d180",
       "status": "passed"
     },
     {
       "target": "firefox",
       "file": "RE-WEB-v0.3.0-rc1-firefox.zip",
       "entries": 23,
-      "sha256": "a6ea8202709dfcb085fdfa6cc98aee20f874eeb5dab72f1961b0631185946ca7",
+      "sha256": "12a2e9f14fdfb77c49c3c112690fcf5734635be4969c1f5ac3746df00f0f523b",
       "status": "passed"
     }
   ],

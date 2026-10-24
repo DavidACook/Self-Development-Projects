@@ -33,8 +33,8 @@ ZIP timestamps and entry ordering are fixed. Package validation checks CRCs, exa
 
 ## Browser release gates
 
-- [ ] Actual Chrome unpacked installation and background/DNR checks pass on a host that permits Chrome startup.
-- [ ] Actual Firefox temporary installation, background/API/popup checks pass on a host that permits Firefox startup.
+- [x] Actual Chrome unpacked installation and background/DNR checks: 52/52 passed in [Linux CI](https://github.com/DavidACook/Self-Development-Projects/actions/runs/40083244745).
+- [x] Actual Firefox temporary installation, background/API/popup checks: 43/43 passed in the same CI run.
 - [ ] Complete both browsers' [manual Google acceptance](INSTALL.md), including a non-ASCII query, Google tabs, spelling shortcut and English/Japanese.
 - [ ] Confirm Web and All URL conventions against current live Google. Google's “Did you mean?” is not a guaranteed acceptance condition; the helper/link behavior is.
 - [ ] Confirm real browser dictionary behavior with the dictionary/settings recorded.

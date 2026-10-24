@@ -1,6 +1,2 @@
-
-> re-web@0.3.0 check
-> node scripts/check.mjs
-
 chrome: manifest, assets, 8 JavaScript files, locales, CSP and network API checks passed.
 firefox: manifest, assets, 8 JavaScript files, locales, CSP and network API checks passed.

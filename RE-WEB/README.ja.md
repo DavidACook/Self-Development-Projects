@@ -6,7 +6,7 @@ Google の「ウェブ」フィルタで、AI による概要などの表示を�
 
 [English](README.md) · [詳しいインストール手順（英語）](docs/INSTALL.md)
 
-**0.3.0 RC1：開発用のリリース候補です。** ストアで署名・承認された製品ではありません。実際のブラウザへのインストール、Google の実ページでの動作確認は、自動テストとは区別しています。[テスト結果](docs/TESTING.md)
+**0.3.0 RC1：開発用のリリース候補です。** ストアで署名・承認された製品ではありません。GitHub Actions で実ブラウザのインストール・API テストが通過しました（Chrome 52 件、Firefox 43 件）。Google の実ページとブラウザの辞書による確認は、まだ手動での検証が必要です。[テスト結果](docs/TESTING.md)
 
 ![日本語の操作画面](docs/assets/popup-japanese.png)
 

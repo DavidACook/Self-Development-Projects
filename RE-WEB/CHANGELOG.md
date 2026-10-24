@@ -8,8 +8,9 @@
 - Added default-on spelling help: browser `spellcheck` hint plus a visibly labelled, user-clicked All-view spelling link. Native Google corrections remain untouched; no promise of forcing their appearance.
 - Master pause now also removes the helper and restores field attributes; spelling can be disabled independently.
 - Expanded migration, localization, popup and spelling-fixture tests, official Mozilla lint and the Firefox real-install/API runner.
+- Fixed a native-API save race exposed by GitHub browser tests: keep a switch in its pending position until the save is acknowledged, reverting only on failure. Added a delayed-save regression check.
 - Added English/Japanese README, Chrome/Firefox install instructions, spelling troubleshooting, privacy, architecture, signing and reproducible packaging docs.
-- Prepared for GitHub publication in the owner's existing projects repository. Installation/live Google acceptance remains separate from passing adapter/validator checks.
+- Published in the owner's existing projects repository. Native browser CI passed 52 Chrome and 43 Firefox checks; live Google/dictionary acceptance and store signing remain separate gates.
 
 ## 0.2.0 RC1 — 24 October 2026
 

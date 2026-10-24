@@ -1,9 +1,13 @@
 {
   "suite": "Production popup with browser API test adapter",
-  "date": "2026-10-24T09:33:04.333Z",
+  "date": "2026-10-24T09:43:09.360Z",
   "checks": [
     {
       "name": "Production HTML, CSS and modules render without errors",
+      "status": "passed"
+    },
+    {
+      "name": "A delayed native save keeps the pending switch position until acknowledgement",
       "status": "passed"
     },
     {

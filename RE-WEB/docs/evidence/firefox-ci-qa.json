@@ -1,0 +1,190 @@
+{
+  "suite": "Firefox temporary installation and real extension APIs",
+  "date": "2026-10-24T09:46:13.941762+00:00",
+  "checks": [
+    {
+      "name": "Unmodified Firefox production package installs temporarily",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox module background starts; native DNR accepts both rules",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: first query parameter",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: later query parameter",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: apex domain",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Japan",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: UK",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: HTTP",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: encoded punctuation",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: pagination and date filter",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: query-looking text in value",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: existing Web mode / no loop",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Web mode first / no loop",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Images",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: AI Mode explicitly selected",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: All explicitly selected",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Videos",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Shopping",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: News",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: unknown future mode",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: empty mode",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: mode without value",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: duplicate modes",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Maps",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Images subdomain",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: accounts",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: other regional domain",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: Bing",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: host prefix attack",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: query host spoof",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: path prefix attack",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: query named elsewhere",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: q only inside a value",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: no query",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: empty query",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: fragment only",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: special mode inside a value",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox DNR: key case is significant",
+      "status": "passed"
+    },
+    {
+      "name": "Pause removes actual rules and settings survive a fresh message",
+      "status": "passed"
+    },
+    {
+      "name": "Unsupported language patches are rejected by the real background",
+      "status": "passed"
+    },
+    {
+      "name": "Production popup loads with actual Firefox background messaging",
+      "status": "passed"
+    },
+    {
+      "name": "Japanese popup labels and saved locale work in Firefox",
+      "status": "passed"
+    },
+    {
+      "name": "Firefox popup pause and independent spelling preference work",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "No live Google results, native spelling dictionary, store signing, Android, or OS coverage.",
+    "After installing the unmodified package, a test-only copy adds QA pages, feedback permission and an isolated localhost result callback/CSP exception. Production JS/CSS is unchanged. No real search queries are sent."
+  ],
+  "browser": "158.0.1",
+  "status": "passed",
+  "ci": {
+    "run_url": "https://github.com/DavidACook/Self-Development-Projects/actions/runs/40083244745",
+    "commit": "3d711ab8e34aa08d6842031c43ed21eb8c5e8681",
+    "job_id": 120840912319,
+    "runner": "ubuntu-latest"
+  }
+}

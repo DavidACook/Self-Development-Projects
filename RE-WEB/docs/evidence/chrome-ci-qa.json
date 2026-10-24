@@ -1,0 +1,224 @@
+{
+  "suite": "Real Chrome extension QA on GitHub Actions",
+  "checks": [
+    {
+      "name": "Manifest V3 installs and service worker starts",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome accepts both RE2 expressions",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: first query parameter",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: later query parameter",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: apex domain",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Japan",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: UK",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: HTTP",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: encoded punctuation",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: pagination and date filter",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: query-looking text in value",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: existing Web mode / no loop",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Web mode first / no loop",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Images",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: AI Mode explicitly selected",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: All explicitly selected",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Videos",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Shopping",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: News",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: unknown future mode",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: empty mode",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: mode without value",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: duplicate modes",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Maps",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Images subdomain",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: accounts",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: other regional domain",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: Bing",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: host prefix attack",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: query host spoof",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: path prefix attack",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: query named elsewhere",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: q only inside a value",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: no query",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: empty query",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: fragment only",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: special mode inside a value",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR: key case is significant",
+      "status": "passed"
+    },
+    {
+      "name": "Chrome DNR excludes POST and subframes",
+      "status": "passed"
+    },
+    {
+      "name": "Real main-frame navigation redirects once and preserves parameters",
+      "status": "passed"
+    },
+    {
+      "name": "Website GET form searches use the Web filter",
+      "status": "passed"
+    },
+    {
+      "name": "Explicit Images, Shopping, Maps and future modes survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "Bing and unsupported domains remain untouched",
+      "status": "passed"
+    },
+    {
+      "name": "Engine toggle changes real DNR rules and navigation",
+      "status": "passed"
+    },
+    {
+      "name": "Master pause removes rules and disables engine controls",
+      "status": "passed"
+    },
+    {
+      "name": "Local preferences and rule state persist across browser restart",
+      "status": "passed"
+    },
+    {
+      "name": "Keyboard can focus and operate master switch",
+      "status": "passed"
+    },
+    {
+      "name": "Popup fits 320px and 380px without horizontal overflow",
+      "status": "passed"
+    },
+    {
+      "name": "Reduced-motion preference stops decorative animation",
+      "status": "passed"
+    },
+    {
+      "name": "About and privacy view opens, explains limits, and returns",
+      "status": "passed"
+    },
+    {
+      "name": "Only four local preferences are stored",
+      "status": "passed"
+    },
+    {
+      "name": "No popup page JavaScript errors",
+      "status": "passed"
+    }
+  ],
+  "status": "passed",
+  "limitations": [
+    "Local navigation fixtures, not live Google pages.",
+    "No store signing, native spelling dictionary, macOS, Windows or mobile acceptance."
+  ],
+  "ci": {
+    "run_url": "https://github.com/DavidACook/Self-Development-Projects/actions/runs/40083244745",
+    "commit": "3d711ab8e34aa08d6842031c43ed21eb8c5e8681",
+    "job_id": 120840912122,
+    "runner": "ubuntu-latest"
+  }
+}

@@ -10,7 +10,7 @@ A small, free extension for desktop **Chrome and Firefox**, with a PS2-inspired 
 
 ![RE:WEB control deck](docs/assets/re-web-portfolio.png)
 
-**Version 0.3.0 RC1.** Browser-specific packages are provided. Automated code, popup, spelling-fixture and manifest checks are recorded in [test evidence](docs/TESTING.md). Full installation/live-Google acceptance is a separate release gate; this is not a store-signed stable release.
+**Version 0.3.0 RC1.** Browser-specific packages are provided. Native installation/API checks now pass in both browsers on [GitHub Actions](https://github.com/DavidACook/Self-Development-Projects/actions/runs/40083244745): **52 Chrome checks and 43 Firefox checks**. Code, interface, spelling-fixture and manifest results are recorded in [test evidence](docs/TESTING.md). Live Google pages and native dictionary behavior still need manual acceptance; this is not a store-signed stable release.
 
 ## Download and install
 
@@ -51,8 +51,8 @@ Open the toolbar popup → **Language / 言語** → **日本語**. All controls
 
 | Target | Status / scope |
 | --- | --- |
-| Chrome 120+ desktop | Manifest V3 module service worker and Chrome package. Full host installation acceptance is recorded separately in test evidence. |
-| Firefox 140+ desktop | Manifest V3 module background scripts, native `browser` APIs, stable add-on ID and no-data-collection declaration. Separate Firefox package and official `web-ext` lint. |
+| Chrome 120+ desktop | Manifest V3 module service worker. Native installation, routing, storage and popup suite passed in GitHub CI; live Google acceptance pending. |
+| Firefox 140+ desktop | Manifest V3 module background scripts, native `browser` APIs, stable add-on ID and no-data-collection declaration. Separate Firefox package; native installation/API/popup suite passed in CI; official `web-ext` lint has zero warnings/errors. |
 | Google `.com`, `.co.jp`, `.co.uk` | HTTP/HTTPS, apex/`www`; other country domains are not requested. |
 | Other engines, mobile, Edge, incognito, managed browsers | Outside verified release scope. |
 
@@ -89,7 +89,7 @@ npm run test:firefox         # Real Firefox install/API suite; Firefox + geckodr
 npm run package             # Both ZIPs, source archive and checksums
 ```
 
-`REWEB_CHROME_PATH` selects a full Chrome for Testing executable. `REWEB_UI_CHROME_PATH` can select the renderer executable. `REWEB_FIREFOX_PATH`/`REWEB_GECKODRIVER_PATH` select local Firefox/geckodriver. Renderer tests use a test adapter and do not prove installation. Firefox API tests install the original package first, then a temporary, instrumented copy without changing production code. [Testing details](docs/TESTING.md).
+`REWEB_CHROME_PATH` selects a full Chrome for Testing executable. `REWEB_UI_CHROME_PATH` can select the renderer executable. `REWEB_FIREFOX_PATH`/`REWEB_GECKODRIVER_PATH` select local Firefox/geckodriver. Renderer tests use a test adapter and do not prove installation. Firefox API tests install the original package first, then a temporary, instrumented copy with unchanged production JavaScript/CSS; its test-only scripts report synthetic outcomes to localhost. [Testing details](docs/TESTING.md).
 
 ## Documentation and source
 

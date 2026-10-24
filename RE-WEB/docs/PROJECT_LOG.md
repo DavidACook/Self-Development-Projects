@@ -6,6 +6,8 @@ Requested Chrome and Firefox, full documentation, default-English Japanese suppo
 
 The owner authorized GitHub publication. Selected the existing `DavidACook/Self-Development-Projects` repository as the project home after verifying its current two-file tree, preserving existing work. The connected tool can write existing repositories; a browser check showed that creating a new repository would require sign-in. No sign-in or credential request was needed for this chosen publication path.
 
+GitHub CI exposed and verified a fix for pending switches reverting visually while a native API save was still in flight; added delayed-save UI regression coverage. Firefox temporary installation succeeded, and its QA harness was adapted for privileged-page WebDriver restrictions and Firefox's developer-only DNR feedback preference. The diagnostic preference and localhost callback are confined to disposable test profiles/packages. Final native tests passed: 52 Chrome and 43 Firefox checks on [GitHub Actions](https://github.com/DavidACook/Self-Development-Projects/actions/runs/40083244745).
+
 All current test/evidence results are in `TESTING.md`; unknown/unexecuted gates remain explicit. Product screenshots were re-rendered with an installed Japanese font for legible Japanese QA. Store signing and LinkedIn publication are outside this turn's changes.
 
 ## Historical record — 24 October 2026 — 0.2.0 RC1

@@ -10,7 +10,7 @@ Designed and developed RE:WEB, a lightweight Manifest V3 browser extension that 
 
 Implemented shared Chrome/Firefox code with browser-specific manifests, declarative URL routing, settings validation and save-failure recovery. Added spelling help through browser dictionaries and a user-controlled Google shortcut, preserving existing search modes and native suggestions. Documented privacy, installation, Firefox signing, testing and release limitations; published the source under the MIT licence.
 
-Current version: release candidate. Automated logic, interface, spelling-fixture and Firefox manifest validation are recorded separately from pending full installation/live Google acceptance.
+Current version: release candidate. Native Chrome installation/routing checks (52) and Firefox installation/API/UI checks (43) passed on Linux CI. Logic, interface, spelling-fixture and manifest validation are documented. Live Google and native dictionary acceptance remain pending.
 
 ## Short product blurb
 
