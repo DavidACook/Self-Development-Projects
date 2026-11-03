@@ -66,7 +66,7 @@ try{
   await check('Manifest V3 installs and service worker starts',async()=>{
     const manifest=await worker.evaluate(()=>chrome.runtime.getManifest());
     assert.equal(manifest.manifest_version,3);assert.equal(manifest.version,'0.3.0');assert.equal((await rules()).length,2);
-    assert.equal(await popup.locator('#enabled').isChecked(),true);assert.equal(await popup.locator('#googleClassic').isChecked(),true);
+    assert.equal(await popup.locator('#enabled').isChecked(),true);assert.equal(await popup.locator('#googleMode').inputValue(),'web');
   });
   await check('Chrome accepts both RE2 expressions',async()=>{
     for(const rule of await rules())assert.equal((await worker.evaluate(regex=>chrome.declarativeNetRequest.isRegexSupported({regex,isCaseSensitive:true}),rule.condition.regexFilter)).isSupported,true);
@@ -109,20 +109,47 @@ try{
     for(const url of ['https://www.bing.com/search?q=test','https://www.google.de/search?q=test','https://example.org/search?q=test']){await search.goto(url);assert.equal(search.url(),url);}
   });
   await check('Engine toggle changes real DNR rules and navigation',async()=>{
-    await popup.locator('#googleClassic').uncheck();await popup.waitForFunction(()=>document.querySelector('#message').textContent.startsWith('Saved'));
+    await popup.locator('#googleMode').selectOption('off');await popup.waitForFunction(()=>document.querySelector('#message').textContent.startsWith('Saved'));
     assert.deepEqual(await rules(),[]);await search.goto('https://www.google.com/search?q=off');assert.equal(new URL(search.url()).searchParams.has('udm'),false);
-    await popup.locator('#googleClassic').check();await popup.waitForFunction(()=>document.querySelector('#message').textContent.startsWith('Saved'));assert.equal((await rules()).length,2);
+    await popup.locator('#googleMode').selectOption('web');await popup.waitForFunction(()=>document.querySelector('#message').textContent.startsWith('Saved'));assert.equal((await rules()).length,2);
+  });
+  await check('Experimental -ai mode redirects real navigations once and preserves parameters',async()=>{
+    await popup.locator('#googleMode').selectOption('minusAi');
+    await popup.waitForFunction(()=>document.getElementById('googleMode').value==='minusAi' && !document.getElementById('googleMode').disabled);
+    assert.equal((await rules()).length,3);
+    const request='https://www.google.co.jp/search?q=C%2B%2B+%26+cats&hl=ja&x=1&x=2#results';
+    const before=new URL(request);
+    await search.goto(request);
+    const after=new URL(search.url());
+    assert.equal(after.searchParams.get('q'),before.searchParams.get('q')+' -ai');
+    assert.deepEqual(after.searchParams.getAll('x'),['1','2']);
+    assert.equal(after.searchParams.get('hl'),'ja');
+    assert.equal(after.hash,before.hash);
+    await search.reload();
+    assert.equal(search.url(),after.href,'Experimental mode must not append -ai repeatedly');
+    await search.goto('https://www.google.com/search?q=cats&udm=2');
+    assert.equal(search.url(),'https://www.google.com/search?q=cats&udm=2');
+  });
+  await check('Unmodified Google mode disables only routing rules',async()=>{
+    await popup.locator('#googleMode').selectOption('off');
+    await popup.waitForFunction(()=>document.getElementById('googleMode').value==='off' && !document.getElementById('googleMode').disabled);
+    assert.deepEqual(await rules(),[]);
+    await search.goto('https://www.google.com/search?q=unchanged');
+    assert.equal(search.url(),'https://www.google.com/search?q=unchanged');
+    await popup.locator('#googleMode').selectOption('web');
+    await popup.waitForFunction(()=>document.getElementById('googleMode').value==='web' && !document.getElementById('googleMode').disabled);
+    assert.equal((await rules()).length,2);
   });
   await check('Master pause removes rules and disables engine controls',async()=>{
     await popup.locator('#enabled').uncheck();await popup.waitForFunction(()=>document.body.dataset.state==='paused');
-    assert.deepEqual(await rules(),[]);assert.equal(await popup.locator('#googleClassic').isDisabled(),true);
+    assert.deepEqual(await rules(),[]);assert.equal(await popup.locator('#googleMode').isDisabled(),true);
     await search.goto('https://www.google.com/search?q=paused');assert.equal(new URL(search.url()).searchParams.has('udm'),false);
     await screenshot(popup,'popup-paused.png');
   });
   await context.close();
   await launch();popup=await openPopup();
   await check('Local preferences and rule state persist across browser restart',async()=>{
-    assert.equal(await popup.locator('#enabled').isChecked(),false);assert.equal(await popup.locator('#googleClassic').isChecked(),true);assert.deepEqual(await rules(),[]);
+    assert.equal(await popup.locator('#enabled').isChecked(),false);assert.equal(await popup.locator('#googleMode').inputValue(),'web');assert.deepEqual(await rules(),[]);
     await popup.locator('#enabled').check();await popup.waitForFunction(()=>document.body.dataset.state==='active');assert.equal((await rules()).length,2);
   });
   await check('Keyboard can focus and operate master switch',async()=>{
@@ -148,7 +175,7 @@ try{
     await popup.getByRole('button',{name:'Back to controls'}).click();assert.equal(await popup.locator('#controls').isVisible(),true);
   });
   await check('Only four local preferences are stored',async()=>{
-    assert.deepEqual(await worker.evaluate(()=>chrome.storage.local.get(null)),{...DEFAULTS,enabled:true,googleClassic:true});
+    assert.deepEqual(await worker.evaluate(()=>chrome.storage.local.get(null)),{...DEFAULTS,enabled:true,googleMode:'web'});
   });
   await check('No popup page JavaScript errors',async()=>assert.deepEqual(errors,[]));
   report.status='passed';
