@@ -23,6 +23,7 @@ function render() {
   document.getElementById('masterTitle').textContent = t(!settings ? 'loading' : enabled ? 'enabledTitle' : 'pausedTitle');
   document.getElementById('masterDescription').textContent = t(!settings ? 'reading' : enabled ? 'enabledDescription' : 'pausedDescription');
   const mode = pendingPatch?.googleMode ?? settings?.googleMode ?? 'web';
+  document.body.dataset.mode = mode;
   document.getElementById('googleDetail').textContent = t(mode === 'web' ? 'webDetail' : mode === 'minusAi' ? 'minusAiDetail' : 'offDetail');
   document.getElementById('modeWarning').hidden = mode !== 'minusAi';
   for (const [key, input] of Object.entries(inputs)) {
