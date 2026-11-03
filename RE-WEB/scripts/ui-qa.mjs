@@ -79,8 +79,8 @@ try{
   await check('Engine preference survives pause and popup reload',async()=>{
     await page.locator('#googleMode').selectOption('off');await saved(page);await page.locator('#enabled').uncheck();await saved(page);
     await page.reload();await page.waitForFunction(()=>document.body.dataset.state==='paused');
-    assert.equal(await page.locator('#enabled').isChecked(),false);assert.equal(await page.locator('#googleMode').inputValue(),false);
-    await page.locator('#enabled').check();await saved(page);assert.equal(await page.locator('#googleMode').inputValue(),false);
+    assert.equal(await page.locator('#enabled').isChecked(),false);assert.equal(await page.locator('#googleMode').inputValue(),'off');
+    await page.locator('#enabled').check();await saved(page);assert.equal(await page.locator('#googleMode').inputValue(),'off');
     await page.locator('#googleMode').selectOption('web');await saved(page);
   });
   await check('Save failure restores confirmed UI and rule state, then retries',async()=>{
