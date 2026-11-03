@@ -65,7 +65,7 @@ try{
   let popup=await openPopup();
   await check('Manifest V3 installs and service worker starts',async()=>{
     const manifest=await worker.evaluate(()=>chrome.runtime.getManifest());
-    assert.equal(manifest.manifest_version,3);assert.equal(manifest.version,'0.3.0');assert.equal((await rules()).length,2);
+    assert.equal(manifest.manifest_version,3);assert.equal(manifest.version,'0.4.0');assert.equal((await rules()).length,2);
     assert.equal(await popup.locator('#enabled').isChecked(),true);assert.equal(await popup.locator('#googleMode').inputValue(),'web');
   });
   await check('Chrome accepts both RE2 expressions',async()=>{
