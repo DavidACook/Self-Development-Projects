@@ -12,7 +12,7 @@ It doesn't replace Google or change how Google ranks pages. It simply selects Go
 
 ## Install
 
-**Current build: 0.3.0 RC1.** This is a development release, not a signed browser-store release.
+**Development branch: 0.4.0 alpha1.** The downloadable ZIPs below are the previous 0.3.0 RC1 build, which does **not** include the new selector. Build this branch from source to try the new modes. Neither version is a signed browser-store release.
 
 | Browser | Download | How to load it |
 | --- | --- | --- |
@@ -22,6 +22,16 @@ It doesn't replace Google or change how Google ranks pages. It simply selects Go
 Firefox removes temporary add-ons when it closes. A permanent Firefox installation normally needs Mozilla signing; this ZIP is not signed. See [installation help](docs/INSTALL.md) and [release notes](docs/RELEASE.md).
 
 [Source ZIP](downloads/RE-WEB-v0.3.0-rc1-source.zip) · [SHA-256 checksums](downloads/SHA256SUMS.txt)
+
+## Google search modes
+
+Choose a mode in the popup. **Classic Web** is the default.
+
+- **Classic Web:** Opens ordinary searches in Google's Web results view (`udm=14`).
+- **Standard · -ai (experimental):** Adds `-ai` to an ordinary Google query while keeping the regular results layout. This is a search exclusion operator, not an official setting to switch AI off; it can exclude relevant results.
+- **Unmodified Google:** Doesn't redirect ordinary Google searches. Optional spelling help is controlled separately.
+
+Explicit Images, News, Shopping and other modes stay untouched with every choice. Changing modes affects new searches, not tabs already open.
 
 ## What it does
 
