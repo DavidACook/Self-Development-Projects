@@ -23,22 +23,22 @@ test('master pause removes all rules; resuming restores chosen engine setting',a
   assert.deepEqual(state.storage,{...DEFAULTS,enabled:false});await control.update({enabled:true});assert.equal(state.rules.length,2);
 });
 test('engine off survives master off/on',async()=>{
-  const {state,control}=fake();await control.update({googleClassic:false});await control.update({enabled:false});await control.update({enabled:true});
-  assert.deepEqual(state.rules,[]);assert.equal(state.storage.googleClassic,false);
+  const {state,control}=fake();await control.update({googleMode:'off'});await control.update({enabled:false});await control.update({enabled:true});
+  assert.deepEqual(state.rules,[]);assert.equal(state.storage.googleMode,'off');
 });
 test('settings survive a new controller / worker lifecycle',async()=>{
   const a=fake();await a.control.update({enabled:false});const b=fake(a.state.storage);const read=await b.control.reconcile();assert.equal(read.enabled,false);assert.deepEqual(b.state.rules,[]);
 });
 test('concurrent patches serialize without losing preferences',async()=>{
-  const {state,control}=fake();await Promise.all([control.update({enabled:false}),control.update({googleClassic:false}),control.update({enabled:true})]);
-  assert.deepEqual(state.storage,{...DEFAULTS,googleClassic:false});assert.deepEqual(state.rules,[]);
+  const {state,control}=fake();await Promise.all([control.update({enabled:false}),control.update({googleMode:'off'}),control.update({enabled:true})]);
+  assert.deepEqual(state.storage,{...DEFAULTS,googleMode:'off'});assert.deepEqual(state.rules,[]);
 });
 test('DNR failure does not report saved or change persisted settings',async()=>{
   const {state,control}=fake({...DEFAULTS,enabled:false});state.failRules=true;
   await assert.rejects(control.update({enabled:true}));assert.equal(state.storage.enabled,false);assert.equal(state.writes,0);
 });
 test('storage failure rolls rules back and permits next update',async()=>{
-  const {state,control}=fake({enabled:true,googleClassic:true});await control.reconcile();state.failWrite=true;
+  const {state,control}=fake({enabled:true,googleMode:'web'});await control.reconcile();state.failWrite=true;
   await assert.rejects(control.update({enabled:false}));assert.equal(state.rules.length,2);assert.equal(state.storage.enabled,true);
   state.failWrite=false;await control.update({enabled:false});assert.deepEqual(state.rules,[]);
 });
@@ -55,4 +55,23 @@ test('language and spelling settings persist without changing Web rules',async()
   await control.update({language:'ja',spellingHelper:false});
   assert.equal(state.storage.language,'ja');assert.equal(state.storage.spellingHelper,false);
   assert.deepEqual(state.rules,before);
+});
+
+test('experimental mode creates three rules and off mode keeps spelling preference', async()=>{
+  const {state,control}=fake();
+  await control.update({googleMode:'minusAi'});
+  assert.equal(state.rules.length,3);
+  assert.equal(state.storage.googleMode,'minusAi');
+  await control.update({googleMode:'off'});
+  assert.deepEqual(state.rules,[]);
+  assert.equal(state.storage.spellingHelper,true);
+});
+test('legacy disabled Google routing migrates before new mode is saved',async()=>{
+  const {state,control}=fake({googleClassic:false,enabled:true});
+  const migrated=await control.reconcile();
+  assert.equal(migrated.googleMode,'off');
+  assert.deepEqual(state.rules,[]);
+  await control.update({googleMode:'web'});
+  assert.equal(state.storage.googleMode,'web');
+  assert.equal(state.rules.length,2);
 });

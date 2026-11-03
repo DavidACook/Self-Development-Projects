@@ -1,13 +1,18 @@
-/** Keep the v0.1 keys so an in-place update preserves existing choices. */
-export const DEFAULTS = Object.freeze({ enabled: true, googleClassic: true, spellingHelper: true, language: 'en' });
-export const BOOLEAN_KEYS = Object.freeze(['enabled', 'googleClassic', 'spellingHelper']);
+/** Existing v0.1-v0.3 googleClassic preferences migrate to googleMode. */
+export const GOOGLE_MODES = Object.freeze(['web', 'minusAi', 'off']);
+export const DEFAULTS = Object.freeze({ enabled: true, googleMode: 'web', spellingHelper: true, language: 'en' });
+export const BOOLEAN_KEYS = Object.freeze(['enabled', 'spellingHelper']);
 export const LANGUAGES = Object.freeze(['en', 'ja']);
 
 export function normalizeSettings(raw = {}) {
-  return Object.fromEntries(Object.entries(DEFAULTS).map(([key, fallback]) => [
-    key, key === 'language' ? (LANGUAGES.includes(raw[key]) ? raw[key] : fallback)
-      : (typeof raw[key] === 'boolean' ? raw[key] : fallback),
-  ]));
+  const input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+  return {
+    enabled: typeof input.enabled === 'boolean' ? input.enabled : DEFAULTS.enabled,
+    googleMode: GOOGLE_MODES.includes(input.googleMode) ? input.googleMode
+      : input.googleClassic === false ? 'off' : DEFAULTS.googleMode,
+    spellingHelper: typeof input.spellingHelper === 'boolean' ? input.spellingHelper : DEFAULTS.spellingHelper,
+    language: LANGUAGES.includes(input.language) ? input.language : DEFAULTS.language,
+  };
 }
 
 export function validatePatch(patch) {
@@ -15,9 +20,10 @@ export function validatePatch(patch) {
     throw new TypeError('Invalid settings.');
   }
   const keys = Object.keys(patch);
-  if (!keys.length || keys.some(key => key === 'language' ? !LANGUAGES.includes(patch[key])
-    : !BOOLEAN_KEYS.includes(key) || typeof patch[key] !== 'boolean')) {
-    throw new TypeError('Settings must contain supported booleans or an English/Japanese language choice.');
+  if (!keys.length || keys.some(key => key === 'googleMode' ? !GOOGLE_MODES.includes(patch[key])
+    : key === 'language' ? !LANGUAGES.includes(patch[key])
+      : !BOOLEAN_KEYS.includes(key) || typeof patch[key] !== 'boolean')) {
+    throw new TypeError('Settings must contain supported switches, a Google mode or an English/Japanese language choice.');
   }
   return { ...patch };
 }

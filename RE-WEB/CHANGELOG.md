@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 alpha1 — 3 November 2026 (review branch)
+
+- Added **Classic Web** (default), **Standard -ai** (experimental) and **Unmodified Google** modes.
+- Uses browser-managed redirect rules for both Web filtering and the -ai search exclusion; no extension query storage or telemetry.
+- Preserves explicit Google tabs and avoids repeating the -ai operator.
+- Migrates prior `googleClassic=false` preferences to Unmodified mode.
+- Added English/Japanese labels and a caution about -ai changing search results.
+- Added unit, UI and browser tests. CI validation and live-provider acceptance are separate release gates.
+- This is a development branch, not a published extension release.
+
 ## 0.3.0 RC1 — 24 October 2026
 
 - Added separate Chrome/Firefox Manifest V3 builds; Firefox uses module background scripts and native Promise APIs, stable add-on identity and the required no-data-collection declaration.

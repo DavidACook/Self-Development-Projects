@@ -102,3 +102,13 @@ footer { padding-top: 5px; }
 #message { font-size: 9px; margin-top: 6px; }
 @media (max-width: 340px) { .viewport { display: none; } }
 html[lang='ja'] .viewport { height: 48px; }
+
+/* Google search mode selector, styled to match the existing console deck. */
+.mode-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 38px; }
+.mode-row strong { font-size: 13px; font-weight: 500; }
+#googleMode { width: 208px; max-width: 66%; min-width: 0; font-size: 11px; }
+.mode-warning { color: #ffe09b; font-size: 10px; line-height: 1.45; margin: 5px 0 8px; border-left: 2px solid #c9a75c; padding-left: 7px; }
+body[data-mode='minusAi'] .viewport { display: none; }
+html[lang='ja'] .mode-row strong { font-size: 12px; }
+html[lang='ja'] #googleMode { font-size: 11px; }
+@media (forced-colors: active) { .mode-warning { color: CanvasText; border-color: Highlight; } }

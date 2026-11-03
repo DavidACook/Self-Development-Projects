@@ -9,7 +9,7 @@ from build import build
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT/'dist'
-VERSION = '0.3.0-rc1'
+VERSION = '0.4.0-alpha1'
 STAMP = (2026, 10, 24, 0, 0, 0)
 
 def files_under(base, excluded=()):
@@ -39,7 +39,7 @@ def write_verified_zip(output,entries):
 artifacts=[];reports=[]
 for target,folder in build().items():
     manifest=json.loads((folder/'manifest.json').read_text())
-    assert manifest['version']=='0.3.0' and manifest['manifest_version']==3
+    assert manifest['version']=='0.4.0' and manifest['manifest_version']==3
     assert manifest['permissions']==['storage','declarativeNetRequestWithHostAccess']
     production={f.relative_to(folder).as_posix():f.read_bytes() for f in files_under(folder)}
     references=[manifest['action']['default_popup'],*manifest['icons'].values(),*manifest['background'].get('scripts',[])]

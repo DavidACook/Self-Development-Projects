@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "RE:WEB",
   "short_name": "RE:WEB",
-  "version": "0.3.0",
-  "version_name": "0.3.0 RC1",
+  "version": "0.4.0",
+  "version_name": "0.4.0 alpha1",
   "description": "__MSG_extensionDescription__",
   "minimum_chrome_version": "120",
   "permissions": [

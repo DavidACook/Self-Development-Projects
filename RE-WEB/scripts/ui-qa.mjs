@@ -48,31 +48,40 @@ try{
   await page.goto(url);await page.waitForFunction(()=>document.body.dataset.state==='active');
   await check('Production HTML, CSS and modules render without errors',async()=>{
     assert.equal(await page.getByRole('switch',{name:'Enable RE:WEB',exact:true}).isChecked(),true);
-    assert.equal(await page.getByRole('switch',{name:'Prefer Google Web results',exact:true}).isChecked(),true);
+    assert.equal(await page.locator('#googleMode').inputValue(),'web');
     assert.equal(await page.evaluate(()=>__rewebQA.rules.length),2);assert.deepEqual(errors,[]);
     assert.equal(await page.locator('html').getAttribute('lang'),'en');
     assert.equal(await page.locator('#spellingHelper').isChecked(),true);
   });
   await check('A delayed native save keeps the pending switch position until acknowledgement',async()=>{
     await page.evaluate(()=>{__rewebQA.delayMs=200;});
-    await page.locator('#googleClassic').uncheck();
-    assert.equal(await page.locator('#googleClassic').isChecked(),false);
+    await page.locator('#googleMode').selectOption('off');
+    assert.equal(await page.locator('#googleMode').inputValue(),'off');
     await saved(page);assert.equal(await page.evaluate(()=>__rewebQA.rules.length),0);
-    await page.locator('#googleClassic').check();await saved(page);
+    await page.locator('#googleMode').selectOption('web');await saved(page);
     await page.evaluate(()=>{__rewebQA.delayMs=0;});
+  });
+  await check('Experimental mode warns about changed search results and can be switched back',async()=>{
+    await page.locator('#googleMode').selectOption('minusAi');await saved(page);
+    assert.equal(await page.locator('#googleMode').inputValue(),'minusAi');
+    assert.equal(await page.locator('#modeWarning').isVisible(),true);
+    assert.equal(await page.evaluate(()=>__rewebQA.rules.length),3);
+    await page.locator('#googleMode').selectOption('web');await saved(page);
+    assert.equal(await page.locator('#modeWarning').isVisible(),false);
+    assert.equal(await page.evaluate(()=>__rewebQA.rules.length),2);
   });
   await check('Master switch pauses, remembers engine preference and resumes',async()=>{
     await page.locator('#enabled').uncheck();await saved(page);
-    assert.equal(await page.locator('#googleClassic').isDisabled(),true);assert.equal(await page.locator('#googleClassic').isChecked(),true);
+    assert.equal(await page.locator('#googleMode').isDisabled(),true);assert.equal(await page.locator('#googleMode').inputValue(),'web');
     assert.equal(await page.evaluate(()=>__rewebQA.rules.length),0);await capture(page,'popup-paused.png');
-    await page.locator('#enabled').check();await saved(page);assert.equal(await page.locator('#googleClassic').isDisabled(),false);
+    await page.locator('#enabled').check();await saved(page);assert.equal(await page.locator('#googleMode').isDisabled(),false);
   });
   await check('Engine preference survives pause and popup reload',async()=>{
-    await page.locator('#googleClassic').uncheck();await saved(page);await page.locator('#enabled').uncheck();await saved(page);
+    await page.locator('#googleMode').selectOption('off');await saved(page);await page.locator('#enabled').uncheck();await saved(page);
     await page.reload();await page.waitForFunction(()=>document.body.dataset.state==='paused');
-    assert.equal(await page.locator('#enabled').isChecked(),false);assert.equal(await page.locator('#googleClassic').isChecked(),false);
-    await page.locator('#enabled').check();await saved(page);assert.equal(await page.locator('#googleClassic').isChecked(),false);
-    await page.locator('#googleClassic').check();await saved(page);
+    assert.equal(await page.locator('#enabled').isChecked(),false);assert.equal(await page.locator('#googleMode').inputValue(),'off');
+    await page.locator('#enabled').check();await saved(page);assert.equal(await page.locator('#googleMode').inputValue(),'off');
+    await page.locator('#googleMode').selectOption('web');await saved(page);
   });
   await check('Save failure restores confirmed UI and rule state, then retries',async()=>{
     await page.evaluate(()=>{__rewebQA.failWrite=true;});
@@ -84,14 +93,14 @@ try{
   });
   await check('Read failure disables controls and recovers via Retry',async()=>{
     await page.evaluate(()=>localStorage.setItem('qaFailRead','true'));await page.reload();await page.waitForFunction(()=>document.body.dataset.state==='error');
-    assert.equal(await page.locator('#enabled').isDisabled(),true);assert.equal(await page.locator('#googleClassic').isDisabled(),true);
+    assert.equal(await page.locator('#enabled').isDisabled(),true);assert.equal(await page.locator('#googleMode').isDisabled(),true);
     await page.evaluate(()=>localStorage.removeItem('qaFailRead'));await page.getByRole('button',{name:'Retry',exact:true}).click();await page.waitForFunction(()=>document.body.dataset.state==='active');
   });
   await check('Keyboard Tab and Space operate labelled switches',async()=>{
     await page.reload();await page.waitForFunction(()=>document.body.dataset.state==='active');await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(()=>document.activeElement.id),'enabled');await page.keyboard.press('Space');await saved(page);
     assert.equal(await page.locator('#enabled').isChecked(),false);await page.keyboard.press('Space');await saved(page);
-    await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement.id),'googleClassic');
+    await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>document.activeElement.id),'googleMode');
   });
   await check('320px and 380px layouts have no horizontal overflow and fit popup height',async()=>{
     for(const width of [320,380]){

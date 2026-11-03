@@ -1,16 +1,16 @@
 # Privacy statement
 
-Effective for **0.3.0 RC1**, 24 October 2026.
+Effective for **0.4.0 alpha1 development branch**, 3 November 2026. Previous 0.3.0 RC1 packages are unchanged.
 
 RE:WEB has no backend, account, telemetry, advertising, analytics or query logs. It does not automatically call an external spelling service or load remote fonts, scripts or images.
 
 ## Local settings
 
-Four preferences are saved with `storage.local`: `enabled`, `googleClassic`, `spellingHelper` and `language` (`en` or `ja`). Values are not synced by the extension. Existing v0.1/v0.2 routing choices migrate; new spelling/language values default to on/English. It does not save queries, results, URLs, browsing history or personal identifiers. Uninstalling removes the extension's local settings under the browser's normal rules.
+Four current preferences are saved with `storage.local`: `enabled`, `googleMode` (`web`, `minusAi` or `off`), `spellingHelper` and `language` (`en` or `ja`). Existing v0.1–v0.3 `googleClassic` values are read for migration; an old key may remain in storage on upgraded installs. Values are not synced by the extension. It does not save queries, results, URLs, browsing history or personal identifiers. Uninstalling removes the extension's local settings under the browser's normal rules.
 
 ## Google routing
 
-The browser's declarative rules add `udm=14` to ordinary supported Google searches. The background code does not receive search request payloads. Your browser still sends your query and normal request metadata to Google; Google processes those searches under its own policies. RE:WEB does not control Google's ranking, cookies, account settings, Labs participation or data handling.
+The browser's declarative rules add `udm=14` in Classic Web mode or append the search exclusion operator `-ai` in experimental Standard mode; Unmodified mode adds no routing rule. The `-ai` operator changes the search query and may exclude relevant results. The background code does not receive search request payloads. Your browser still sends your query and normal request metadata to Google; Google processes those searches under its own policies. RE:WEB does not control Google's ranking, cookies, account settings, Labs participation or data handling.
 
 ## Spelling helper
 
@@ -22,7 +22,7 @@ Browser spellchecking is controlled by your browser's dictionaries and settings.
 
 ## Permissions
 
-- `storage`: four local preferences.
+- `storage`: four current local preferences (and possible legacy migration key).
 - `declarativeNetRequestWithHostAccess`: browser-managed search routing on permitted Google sites.
 - Google host permissions: `google.com`, `www.google.com`, `google.co.jp`, `www.google.co.jp`, `google.co.uk`, `www.google.co.uk` over HTTP/HTTPS. Required for redirects and the local spelling script. Browsers may describe this broadly as permission to read/change site data.
 

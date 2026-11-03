@@ -9,14 +9,15 @@ export function createController(api) {
     queue = result.catch(() => {});
     return result;
   };
-  const read = async () => normalizeSettings(await api.storage.local.get(DEFAULTS));
+  // Read raw keys so legacy googleClassic=false is not masked by a new default.
+  const read = async () => normalizeSettings(await api.storage.local.get(null));
   const apply = settings => api.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: [...RULE_IDS], addRules: buildRules(settings),
   });
   const badge = async settings => {
     // Cosmetic badge failure must not undo working search rules.
     try {
-      const active = settings.enabled && settings.googleClassic;
+      const active = settings.enabled && (settings.googleMode !== 'off' || settings.spellingHelper);
       await api.action.setBadgeText({ text: active ? 'ON' : 'OFF' });
       await api.action.setBadgeBackgroundColor({ color: active ? '#165269' : '#444b66' });
     } catch { /* Search control does not depend on the toolbar badge. */ }

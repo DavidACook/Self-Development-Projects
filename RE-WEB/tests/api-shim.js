@@ -21,7 +21,7 @@ const api={
 const controller=createController(api);
 globalThis.__rewebQA=qa;
 globalThis.chrome={runtime:{
-  getManifest:()=>({version:'0.3.0',version_name:'0.3.0 RC1'}),
+  getManifest:()=>({version:'0.4.0',version_name:'0.4.0 alpha1'}),
   sendMessage:async message=>{
     if(qa.delayMs)await new Promise(resolve=>setTimeout(resolve,qa.delayMs));
     try {
