@@ -16,16 +16,19 @@ const t = key => translate(settings?.language || 'en', key);
 function render() {
   localize(document, settings?.language || 'en');
   const enabled = settings?.enabled ?? false;
-  const active = enabled && settings.googleClassic;
+  const active = enabled && (settings.googleMode !== 'off' || settings.spellingHelper);
   document.body.dataset.state = retry.hidden ? !settings ? 'loading' : active ? 'active' : 'paused' : 'error';
   document.getElementById('systemState').textContent = t(!settings ? 'connecting' : active ? 'online' : 'standby');
   document.getElementById('signalState').textContent = t(active ? 'active' : settings ? 'paused' : 'waiting');
   document.getElementById('masterTitle').textContent = t(!settings ? 'loading' : enabled ? 'enabledTitle' : 'pausedTitle');
   document.getElementById('masterDescription').textContent = t(!settings ? 'reading' : enabled ? 'enabledDescription' : 'pausedDescription');
+  const mode = pendingPatch?.googleMode ?? settings?.googleMode ?? 'web';
+  document.getElementById('googleDetail').textContent = t(mode === 'web' ? 'webDetail' : mode === 'minusAi' ? 'minusAiDetail' : 'offDetail');
+  document.getElementById('modeWarning').hidden = mode !== 'minusAi';
   for (const [key, input] of Object.entries(inputs)) {
-    if (key === 'language') input.value = pendingPatch?.language ?? settings?.language ?? 'en';
+    if (key === 'language' || key === 'googleMode') input.value = pendingPatch?.[key] ?? settings?.[key] ?? DEFAULTS[key];
     else input.checked = pendingPatch?.[key] ?? settings?.[key] ?? false;
-    input.disabled = busy || !settings || (BOOLEAN_KEYS.includes(key) && key !== 'enabled' && !enabled);
+    input.disabled = busy || !settings || (key !== 'enabled' && key !== 'language' && !enabled);
   }
   fieldset.disabled = busy || !settings || !enabled;
   aboutButton.textContent = t(aboutButton.getAttribute('aria-expanded') === 'true' ? 'backButton' : 'aboutButton');
@@ -44,7 +47,7 @@ async function load() {
 }
 for (const [key, input] of Object.entries(inputs)) {
   input.addEventListener('change', async () => {
-    const next = key === 'language' ? input.value : input.checked;
+    const next = key === 'language' || key === 'googleMode' ? input.value : input.checked;
     const hadFocus = document.activeElement === input;
     pendingPatch = { [key]: next };
     busy = true; retry.hidden = true; feedback = 'applying'; render();
