@@ -24,7 +24,7 @@ test('master pause removes all rules; resuming restores chosen engine setting',a
 });
 test('engine off survives master off/on',async()=>{
   const {state,control}=fake();await control.update({googleMode:'off'});await control.update({enabled:false});await control.update({enabled:true});
-  assert.deepEqual(state.rules,[]);assert.equal(state.storage.googleMode,false);
+  assert.deepEqual(state.rules,[]);assert.equal(state.storage.googleMode,'off');
 });
 test('settings survive a new controller / worker lifecycle',async()=>{
   const a=fake();await a.control.update({enabled:false});const b=fake(a.state.storage);const read=await b.control.reconcile();assert.equal(read.enabled,false);assert.deepEqual(b.state.rules,[]);
