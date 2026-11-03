@@ -28,12 +28,16 @@
       </label>
       <fieldset id="engineControls" disabled>
         <legend><span>01</span> <span data-i18n="routing">SEARCH ROUTING</span></legend>
-        <label class="engine toggle-row" for="googleClassic">
-          <span><strong>Google <span class="mode-label">/ WEB</span></strong><small data-i18n="googleDescription">Prefer links over AI Overviews.</small></span>
-          <input id="googleClassic" type="checkbox" role="switch" aria-label="Prefer Google Web results" data-i18n-aria="googleLabel" aria-describedby="googleDetail" disabled>
-          <span class="switch" aria-hidden="true"></span>
-        </label>
-        <p id="googleDetail" class="engine-detail" data-i18n="googleDetail">Google.com, .co.jp &amp; .co.uk · Explicit search tabs are preserved.</p>
+        <div class="mode-row">
+          <label for="googleMode"><strong>Google <span class="mode-label" data-i18n="modeLabel">/ SEARCH MODE</span></strong></label>
+          <select id="googleMode" aria-describedby="googleDetail modeWarning" disabled>
+            <option value="web" data-i18n="modeWeb">Classic Web · recommended</option>
+            <option value="minusAi" data-i18n="modeMinusAi">Standard · -ai (experimental)</option>
+            <option value="off" data-i18n="modeOff">Unmodified Google</option>
+          </select>
+        </div>
+        <p id="googleDetail" class="engine-detail" data-i18n="webDetail">Web results for ordinary searches. Explicit search tabs are preserved.</p>
+        <p id="modeWarning" class="mode-warning" role="status" hidden data-i18n="minusAiWarning">Experimental: -ai excludes matching websites and might not remove AI Overviews.</p>
         <label class="engine spelling-row toggle-row" for="spellingHelper">
           <span><strong data-i18n="spelling">Spelling help</strong><small data-i18n="spellingDescription">Browser spellcheck + a Google spelling shortcut.</small></span>
           <input id="spellingHelper" type="checkbox" role="switch" aria-label="Enable spelling help" data-i18n-aria="spellingLabel" disabled>
