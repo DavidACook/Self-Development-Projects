@@ -39,6 +39,16 @@ try {
     const actual=ids.includes(101)?'allow':ids.includes(100)?'redirect':undefined;
     assert(actual===expected, JSON.stringify(result));
   });
+  await check('Experimental -ai mode creates Chrome/Firefox-compatible browser rules', async () => {
+    await send('update-settings',{googleMode:'minusAi'});
+    const rules=await browser.declarativeNetRequest.getDynamicRules();
+    assert(rules.length===3,'Expected experimental redirect and two allow rules');
+    const matching=await browser.declarativeNetRequest.testMatchOutcome({url:'https://www.google.com/search?q=cats',type:'main_frame',method:'get'});
+    assert(matching.matchedRules.some(rule=>rule.ruleId===102),'Experimental redirect not selected');
+    const existing=await browser.declarativeNetRequest.testMatchOutcome({url:'https://www.google.com/search?q=cats+-ai',type:'main_frame',method:'get'});
+    assert(existing.matchedRules.some(rule=>rule.ruleId===103),'Existing exclusion was not preserved');
+    await send('update-settings',{googleMode:'web'});
+  });
   await check('Pause removes actual rules and settings survive a fresh message', async () => {
     await send('update-settings',{enabled:false,language:'ja',spellingHelper:false});
     assert((await browser.declarativeNetRequest.getDynamicRules()).length===0, 'Pause failed');
@@ -65,7 +75,7 @@ async function check(name,fn){await fn();report.checks.push({name,status:'passed
 try{
   await check('Production popup loads with actual Firefox background messaging',async()=>{
     await wait(()=>document.body.dataset.state==='active');
-    assert(document.getElementById('googleClassic').checked,'Web preference missing');
+    assert(document.getElementById('googleMode').value==='web','Classic Web default missing');
     assert(document.querySelector('.tagline').textContent==='De-AI your search and reclaim your brain.','Wrong English tagline');
   });
   await check('Japanese popup labels and saved locale work in Firefox',async()=>{
